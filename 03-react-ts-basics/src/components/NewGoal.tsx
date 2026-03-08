@@ -12,6 +12,10 @@ const NewGoal: FC<NewGoalProps> = ({ onAddGoal }) => {
     const goalInput: string = goal.current!.value
     const summaryInput: string = summary.current!.value
 
+    if (!goalInput || !summaryInput) {
+      return
+    }
+
     e.currentTarget.reset()
 
     onAddGoal(goalInput, summaryInput)
