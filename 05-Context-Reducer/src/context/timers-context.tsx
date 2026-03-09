@@ -1,4 +1,4 @@
-import { createContext, type FC, type ReactNode } from 'react'
+import { createContext, useContext, type FC, type ReactNode } from 'react'
 
 type Timer = { name: string; duration: number }
 
@@ -25,6 +25,16 @@ const TimersContextProvider: FC<TimersContextProviderProps> = ({
     stopTimer() {},
   }
   return <TimersContext.Provider value={ctx}>{children}</TimersContext.Provider>
+}
+
+export function useTimersContext() {
+  const context = useContext(TimersContext)
+
+  if (!context) {
+    throw new Error("Timers Context was used outside it's provider")
+  }
+
+  return context
 }
 
 export default TimersContextProvider
