@@ -1,28 +1,20 @@
 import Input from './components/Input'
+import Form from './components/Form'
 import Button from './components/Button'
-import Container from './components/Container'
 
 const App = () => {
+  const handleSave = (data: unknown) => {
+    const extractedData = data as { name: string; age: string }
+    console.log(extractedData)
+  }
+
   return (
     <main>
-      <Input label='your name' id='username' type='text' />
-      <Input label='your email' id='email' type='text' />
-      <Input label='your age' id='age' type='number' />
-
-      <Container
-        className='button'
-        as={Button}
-        onClick={() => console.log('Hello')}
-      >
-        Click me
-      </Container>
-
-      <p>
-        <Button href='https://www.youtube.com/watch?v=UvNxK_Rtdy4'>Link</Button>
-      </p>
-      <p>
-        <Button>Button</Button>
-      </p>
+      <Form onSave={handleSave}>
+        <Input label='your name' id='username' type='text' />
+        <Input label='your age' id='age' type='number' />
+        <Button>Save</Button>
+      </Form>
     </main>
   )
 }

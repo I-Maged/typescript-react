@@ -11,7 +11,7 @@ function isAnchorProps(props: ButtonProps | AnchorProps): props is AnchorProps {
 const Button: FC<ButtonProps | AnchorProps> = (props) => {
   if (isAnchorProps(props)) return <a className='button' {...props}></a>
 
-  return <button {...props}></button>
+  return <button className='button' {...props}></button>
 }
 
 export default Button
