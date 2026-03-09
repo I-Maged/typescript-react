@@ -1,9 +1,12 @@
+import type { FC } from 'react'
+import { type Timer as TimerProps } from '../context/timers-context'
 import Container from './ui/Container'
 
-const Timer = () => {
+const Timer: FC<TimerProps> = ({ name, duration }) => {
   return (
     <Container as='article'>
-      <h2>TODO: TIMER NAME</h2>
+      <h2>{name}</h2>
+      <p>{duration}</p>
     </Container>
   )
 }
