@@ -12,12 +12,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart(
       state,
-      action: PayloadAction<{
-        id: string
-        title: string
-        price: number
-        quantity: number
-      }>,
+      action: PayloadAction<{ id: string; title: string; price: number }>,
     ) {
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id,
@@ -40,3 +35,5 @@ export const cartSlice = createSlice({
     },
   },
 })
+
+export const { addToCart, removeFromCart } = cartSlice.actions
