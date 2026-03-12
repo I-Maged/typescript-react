@@ -1,6 +1,11 @@
-import { SESSIONS } from '../dummy-sessions.ts'
+// import { SESSIONS } from '../dummy-sessions.ts'
+
+import SessionsList from '../components/Sessions/SessionsList'
+import { useSessionsContext } from '../context/sessionContext'
 
 const Sessions = () => {
+  const { sessions } = useSessionsContext()
+
   return (
     <main id='sessions-page'>
       <header>
@@ -11,14 +16,7 @@ const Sessions = () => {
           you!
         </p>
       </header>
-
-      <div id='sessions-list'>
-        <ul>
-          {SESSIONS.map((session) => (
-            <li key={session.id}>{session.title}</li>
-          ))}
-        </ul>
-      </div>
+      <SessionsList sessions={sessions} />
     </main>
   )
 }

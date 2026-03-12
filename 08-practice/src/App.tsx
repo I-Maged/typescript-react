@@ -5,6 +5,8 @@ import SessionsPage from './pages/Sessions.tsx'
 import SessionPage from './pages/Session.tsx'
 import Root from './pages/Root.tsx'
 
+import SessionContextProvider from './context/sessionContext.tsx'
+
 const Router = createBrowserRouter([
   {
     path: '/',
@@ -18,7 +20,11 @@ const Router = createBrowserRouter([
 ])
 
 const App = () => {
-  return <RouterProvider router={Router} />
+  return (
+    <SessionContextProvider>
+      <RouterProvider router={Router} />
+    </SessionContextProvider>
+  )
 }
 
 export default App
