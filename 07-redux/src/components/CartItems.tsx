@@ -1,11 +1,33 @@
-export default function CartItems() {
-  return (
-    <div id="cart">
-      <p>No items in cart!</p>
+import { addToCart, removeFromCart, type CartItem } from '../store/cartSlice'
+import { useCartDispatch, useCartSelector } from '../store/hooks'
 
-      {/* <ul id="cart-items">
+export default function CartItems() {
+  const dispatch = useCartDispatch()
+
+  const cartItems = useCartSelector((state) => state.cart.items)
+
+  const cartTotal = useCartSelector((state) =>
+    state.cart.items.reduce((val, item) => val + item.price * item.quantity, 0),
+  )
+
+  const formattedTotalPrice = `$${cartTotal.toFixed(2)}`
+
+  const handleAddToCart = (item: CartItem) => {
+    dispatch(addToCart(item))
+  }
+
+  const handleRemoveFromCart = (id: string) => {
+    dispatch(removeFromCart(id))
+  }
+
+  return (
+    <div id='cart'>
+      {cartItems.length === 0 ? (
+        <p>No items in cart!</p>
+      ) : (
+        <ul id='cart-items'>
           {cartItems.map((item) => {
-            const formattedPrice = `$${item.price.toFixed(2)}`;
+            const formattedPrice = `$${item.price.toFixed(2)}`
 
             return (
               <li key={item.id}>
@@ -13,7 +35,7 @@ export default function CartItems() {
                   <span>{item.title}</span>
                   <span> ({formattedPrice})</span>
                 </div>
-                <div className="cart-item-actions">
+                <div className='cart-item-actions'>
                   <button onClick={() => handleRemoveFromCart(item.id)}>
                     -
                   </button>
@@ -21,13 +43,14 @@ export default function CartItems() {
                   <button onClick={() => handleAddToCart(item)}>+</button>
                 </div>
               </li>
-            );
+            )
           })}
-        </ul> */}
-
-      {/* <p id="cart-total-price">
+        </ul>
+      )}
+      <p id='cart-total-price'>
+        {/* Cart Total: <strong>{cartTotal}</strong> */}
         Cart Total: <strong>{formattedTotalPrice}</strong>
-      </p> */}
+      </p>
     </div>
-  );
+  )
 }
